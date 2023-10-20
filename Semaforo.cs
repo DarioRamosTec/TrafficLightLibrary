@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace TrafficLightLibrary
 {
-    public class Class1
+    class Semaforo
     {
+
     }
 }
