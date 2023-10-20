@@ -54,5 +54,10 @@ namespace TrafficLightLibrary
                 stateThread = ThreadTo();
             }
         }
+
+        public void Stop()
+        {
+            thread.Abort();
+        }
     }
 }
