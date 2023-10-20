@@ -8,56 +8,48 @@ using System.Threading.Tasks;
 
 namespace TrafficLightLibrary
 {
-    class Semaforo
+    public class Semaforo
     {
+        string color;
+        public string Color { get => color; set => color = value; }
+        
+        bool estado = false;
+        public bool Estado { get => estado; set => estado = value; }
+
+        int indiceColor;
+        public int IndiceColor { get => indiceColor; set => indiceColor = value; }
+
         public Semaforo ()
         {
 
         }
-    }
 
-    public class Lector
-    {
-        Thread thread;
-        private Func<bool> threadTo;
-        public Func<bool> ThreadTo { get => threadTo; set => threadTo = value; }
-
-        public Lector ()
+        public void SetLight (char color, char state)
         {
-            SetThread(new Func<bool>(() => {
-                    return false;
-                }
-            ));
-        }
-
-        public Lector(Func<bool> func)
-        {
-            SetThread(func);
-        }
-
-        public void SetThread(Func<bool> funToEstablish)
-        {
-            threadTo = funToEstablish;
-        }
-
-        public void Start()
-        {
-            thread = new Thread(ThreadDo);
-            thread.Start();
-        }
-
-        public void ThreadDo()
-        {
-            bool stateThread = true;
-            while (stateThread)
+            switch (color)
             {
-                stateThread = ThreadTo();
-            }
-        }
+                default:
+                    indiceColor = 0;
+                    this.color = "Ninguno";
+                    break;
 
-        public void Stop()
-        {
-            thread.Abort();
+                case 'V':
+                    indiceColor = 1;
+                    this.color = "Verde";
+                    break;
+
+                case 'A':
+                    indiceColor = 2;
+                    this.color = "Amarillo";
+                    break;
+
+                case 'R':
+                    indiceColor = 3;
+                    this.color = "Rojo";
+                    break;
+            }
+
+            estado = state == '1';
         }
     }
 }
